@@ -72,7 +72,7 @@
       width: 100%;
       aspect-ratio: 4 / 3;   /* padroniza proporção */
       border-radius: 12px;
-      object-fit: cover;     /* preenche sem distorcer */
+      object-fit: cover;
       cursor: pointer;
       transition: transform 0.2s ease;
     }
@@ -146,6 +146,19 @@
       height: 100%;
       z-index: 1;
     }
+    .titulo-extra {
+      grid-column: 1 / -1;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: 2rem 1rem;
+      color: #fff;
+      background: rgba(124, 58, 237, 0.2);
+      border: 2px solid #7c3aed;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+
   </style>
 </head>
 <body>
@@ -182,12 +195,21 @@
   // GALERIA
   const galeria = document.getElementById("galeria");
   for (let i = 2; i <= 60; i++) {
+    if (i === 4 || i === 40) continue; // remove foto 4 e 40
+
     if (i === 12) {
       let texto = document.createElement("div");
       texto.className = "texto-extra";
       texto.innerHTML = "Durante o passeio, também houve apresentações de <strong>Astronomia</strong>, <strong>Matemática</strong>, <strong>Química</strong> e <strong>Biologia</strong>, mostrando a ligação entre ciência e universo.";
       galeria.appendChild(texto);
     }
+        if (i === 53) {
+      let titulo = document.createElement("div");
+      titulo.className = "titulo-extra";
+      titulo.innerHTML = "📜 <strong>CONFECÇÃO DO CARTAZ</strong>";
+      galeria.appendChild(titulo);
+    }
+
 
     if (i === 25) {
       let texto = document.createElement("div");
@@ -209,6 +231,28 @@
     img.addEventListener("click", () => abrirModal(img.src));
     galeria.appendChild(img);
   }
+
+  // Créditos finais
+  let creditos = document.createElement("div");
+  creditos.className = "texto-extra";
+  creditos.innerHTML = `
+    <h2>Trabalho feito sob orientação e organização por <strong>Livia Freitas Fonseca</strong></h2>
+    <h3>Fotografia</h3>
+    Ana Carvalho<br>Daniel Fonseca<br>Yasmim da Silva<br>Nicollas Almeida<br>
+    Pedro Lucas Santos<br>Robson de Souza<br>Maele Ferreira<br>Jefson Eduardo Santos<br>
+    Fernando dos Santos<br>Tarcisio Costa<br>Livia Fonseca
+    <h3>Financeiro</h3>
+    Kaio dos Santos<br>Yuri Prazeres<br>Liandro Cardoso
+    <h3>Confecção</h3>
+    Aline Ribeiro<br>Dominick Almeida<br>Dafine Borges<br>Adriele Lopes<br>
+    Francisca dos Santos<br>Livia Fonseca<br>Alci Costa<br>Roberto Silva<br>
+    Israel Silva<br>Mikael Miranda
+    <h3>Fez Além da sua função</h3>
+    • Ana Carvalho (confecção)<br>
+    • Daniel Fonseca (auxiliou na confecção)<br>
+    • Kaio dos Santos (auxiliou em tudo que precisávamos)
+  `;
+  galeria.appendChild(creditos);
 
   const modal = document.getElementById("modal");
   const modalImg = document.getElementById("modalImg");
